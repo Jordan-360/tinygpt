@@ -25,7 +25,7 @@ O God, lind of her husband with a cheeking head,
 
 **Overfitting, visible in the chart below.** Validation loss reached its best of 1.469 at step 3,500 and then rose to 1.508 by step 5,000, while training loss kept falling below 1.0. The model had started memorizing the training text instead of learning patterns that generalize. The script only saves the checkpoint with the best validation loss, so the saved model is the one from before overfitting set in.
 
-![Training and validation loss]<img width="1200" height="675" alt="shakespeare_loss" src="https://github.com/user-attachments/assets/c1b9af32-159b-4bfe-a16b-6b56270e57d9" />
+<img width="1200" height="675" alt="shakespeare_loss" src="https://github.com/user-attachments/assets/c1b9af32-159b-4bfe-a16b-6b56270e57d9" />
 
 
 **Learning in progress.** Samples from the same training run at different points, showing the model go from random characters to play-style dialogue:
