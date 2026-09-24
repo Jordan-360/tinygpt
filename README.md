@@ -23,37 +23,48 @@ O God, lind of her husband with a cheeking head,
 |---|---|---|---|---|---|
 | Tiny Shakespeare | 1.1M chars | 10.8M | RTX 3070 Ti (8GB) | 5.8 min (5,000 steps) | 1.469 |
 
-**Overfitting, visible in the chart below.** Validation loss reached its best of 1.469 and then rose to 1.508 by step 5,000, while training loss kept falling below 1.0. The model had started memorizing the training text instead of learning patterns that generalize. The script only saves the checkpoint with the best validation loss, so the saved model is the one from before overfitting set in.
+**Overfitting, visible in the chart below.** Validation loss reached its best of 1.469 at step 3,500 and then rose to 1.508 by step 5,000, while training loss kept falling below 1.0. The model had started memorizing the training text instead of learning patterns that generalize. The script only saves the checkpoint with the best validation loss, so the saved model is the one from before overfitting set in.
 
-<img width="1200" height="675" alt="shakespeare_loss" src="https://github.com/user-attachments/assets/926007fd-75fb-4eb2-b40e-b4207411ab91" />
+![Training and validation loss](assets/shakespeare_loss.png)
 
+**Learning in progress.** Samples from the same training run at different points, showing the model go from random characters to play-style dialogue:
 
-**Learning in progress.** Samples from the same run at different points in training:
-(venv) PS D:\Projects\tinygpt>    python tinygpt.py train --data input.txt --out models/shakespeare.pt
-device=cuda | 1,115,394 chars | vocab=65 | params=10.8M
-step     0 | train loss 4.330 | val loss 4.321 | 2s
-   sample: '\nThU&;yQrcKidqMBYebEbHwPtROa!N3lv&LeGLtgblJQuH..cbTEOvObpLoq3EiyAky-vMcvyoKh3&:ObmhwrwePW-!S-Q-;!jrUuO,TQY!YAC.?\nYFM&!ljV'
-step   500 | train loss 1.854 | val loss 1.975 | 36s
-   sample: '\nQUENTILES:\nWhat oppet of these mptay that to suldy look\nSe I abjoy sove thant, morth sples with me so,\nHim to your, siul'
-step  1000 | train loss 1.517 | val loss 1.713 | 71s
-   sample: '\nDUKE VINCENTIO:\nPlow this I long this repent the counses\nA have in a well from to here, that the weath can of king I mar'
-step  1500 | train loss 1.371 | val loss 1.590 | 105s
-   sample: "\nAUFIUS:\nI at anger the woulder of your shopes our fortune,\nThis most are your body to the they body,\nSomen many consuit'"
-step  2000 | train loss 1.286 | val loss 1.534 | 140s
-   sample: '\n\nGLOUCESTER:\nI have been your heart.\n\nGLOUCESTER:\nThe king is late to know it, it is a cereman\nContemners shore the caus'
-step  2500 | train loss 1.225 | val loss 1.498 | 174s
-   sample: "\nAnd sure my honesty left and one in passing to\nsave my fault breath. He call'd me that a fearful and father\ntimes, hap r"
-step  3000 | train loss 1.176 | val loss 1.485 | 210s
-   sample: "\nCOMINLEO:\nMadam, I have, my master soul's all,\nAnd all the sons from the uther of their air,\nBanish'd by a mother pleasu"
-step  3500 | train loss 1.126 | val loss 1.469 | 244s
-   sample: "\nAnd have but my father's all be stones fault,\nShall you place me like in heaven, and we demase\nIn the common of my heart"
-step  4000 | train loss 1.080 | val loss 1.490 | 278s
-   sample: "\nI'll follow you.\n\nKING RICHARD II:\nMethought that I know the young of die.\n\nBUSHY:\nI take it not, hold is all my names s"
-step  4500 | train loss 1.035 | val loss 1.480 | 314s
-   sample: "\nWhere you noble Margaret's sons, that sensight,\nYou could confer the contrarge her from sheer\nBe freely well! My prayers"
-step  5000 | train loss 0.998 | val loss 1.508 | 349s
-   sample: "\nMaster are no hearing. Come, Lord of Signior France:\nI will be loathed on thee, soft I have convey'd\nAnd straitly by my "
-done. best val loss 1.469 | model saved to models/shakespeare.pt | log saved to models/shakespeare_log.csv
+- **Step 0** (train loss 4.330, val loss 4.321): random characters, no learned structure yet
+  ```
+  ThU&;yQrcKidqMBYebEbHwPtROa!N3lv&LeGLtgblJQuH..cbTEOvObpLoq3EiyAky-vMcvyoKh3&:ObmhwrwePW-!S-Q-;!jrUuO,TQY!YAC.?
+  ```
+- **Step 500** (train loss 1.854, val loss 1.975): learned the script format (character names in caps, line breaks), but mostly invented words
+  ```
+  QUENTILES:
+  What oppet of these mptay that to suldy look
+  Se I abjoy sove thant, morth sples with me so,
+  ```
+- **Step 1,000** (train loss 1.517, val loss 1.713): real character names and more real words
+  ```
+  DUKE VINCENTIO:
+  Plow this I long this repent the counses
+  A have in a well from to here, that the weath can of king I mar
+  ```
+- **Step 2,000** (train loss 1.286, val loss 1.534): short, grammatical lines appear
+  ```
+  GLOUCESTER:
+  I have been your heart.
+
+  GLOUCESTER:
+  The king is late to know it, it is a cereman
+  ```
+- **Step 3,500** (train loss 1.126, val loss 1.469): best validation loss; this is the checkpoint that was saved
+  ```
+  And have but my father's all be stones fault,
+  Shall you place me like in heaven, and we demase
+  In the common of my heart
+  ```
+- **Step 5,000** (train loss 0.998, val loss 1.508): fluent-sounding, but validation loss has risen, a sign of overfitting
+  ```
+  Master are no hearing. Come, Lord of Signior France:
+  I will be loathed on thee, soft I have convey'd
+  And straitly by my
+  ```
 
 **Temperature experiment.** The same model and prompt, sampled at three temperatures:
 
