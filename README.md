@@ -4,6 +4,7 @@ A small GPT-style language model built and trained from scratch in PyTorch, runn
 
 No pretrained weights and no high-level model libraries: the transformer, training loop, and text generation are all implemented directly. Give it any plain-text file and it learns to write in that style.
 
+<<<<<<< HEAD
 Sample output after about 6 minutes of training on Shakespeare (prompt: `ROMEO:`):
 
 ```
@@ -15,10 +16,17 @@ When it now my best reems not with the cloud to the king.
 
 GREMIO:
 O God, lind of her husband with a cheeking head,
+=======
+<!-- TODO: replace with a real sample from your trained model -->
+```
+ROMEO:
+[paste a sample your model generated here]
+>>>>>>> 2fdb5bf (docs: add training results, samples, and loss curve to README)
 ```
 
 ## Results
 
+<<<<<<< HEAD
 | Dataset | Size | Parameters | Hardware | Training time | Best val loss |
 |---|---|---|---|---|---|
 | Tiny Shakespeare | 1.1M chars | 10.8M | RTX 3070 Ti (8GB) | 5.8 min (5,000 steps) | 1.469 |
@@ -76,6 +84,23 @@ O God, lind of her husband with a cheeking head,
 | 1.2 | `Yonder Romeo, will you be but / backet boastard. / Stirrah, my liege.` | More creative and chaotic: invented words ("boastard," "achieful") and characters from different plays mixed together. |
 
 Runs are reproducible: the script uses a fixed random seed, so two training runs with the same settings produced nearly identical results (best val loss 1.468 and 1.469).
+=======
+<!-- TODO: fill in from your own training runs. Never estimate these. -->
+
+| Dataset | Size | Parameters | Training time | Final val loss |
+|---|---|---|---|---|
+| Tiny Shakespeare | 1.1M chars | ~10.8M | [X min] | [X.XX] |
+
+![Training and validation loss](assets/shakespeare_loss.png)
+
+**Learning in progress.** Samples from the same run at different points in training:
+
+| Step | Sample |
+|---|---|
+| 0 | `[paste the random-character sample]` |
+| [~1000] | `[paste a sample with fake words]` |
+| [5000] | `[paste a late sample]` |
+>>>>>>> 2fdb5bf (docs: add training results, samples, and loss curve to README)
 
 ## How it works
 
@@ -131,6 +156,25 @@ assets/            charts and images used in this README
 requirements.txt
 ```
 
+<<<<<<< HEAD
+=======
+## What I learned
+
+<!-- TODO: write this in your own words after your runs. This is the section interviewers read. Ideas:
+- what surprised you watching the samples improve
+- what train vs. validation loss told you (e.g. signs of overfitting)
+- a problem you hit and how you solved it
+- what changing a setting (temperature, model size, context length) did -->
+
+## Next steps
+
+<!-- TODO: keep only the ones you plan to do, and check them off as you go -->
+- [ ] Train on a custom dataset
+- [ ] Experiment with model size and context length, and compare results
+- [ ] Replace the character tokenizer with byte-pair encoding (BPE)
+- [ ] Add a simple web interface for generating text
+
+>>>>>>> 2fdb5bf (docs: add training results, samples, and loss curve to README)
 ## Acknowledgments
 
 The architecture follows Andrej Karpathy's [nanoGPT](https://github.com/karpathy/nanoGPT) and his "Let's build GPT: from scratch, in code, spelled out" lecture. Tiny Shakespeare dataset from [char-rnn](https://github.com/karpathy/char-rnn).
